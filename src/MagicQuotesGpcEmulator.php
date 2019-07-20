@@ -2,22 +2,10 @@
 
 class MagicQuotesGpcEmulator {
   public function apply() {
-    $_GET = $this->add_magic_quotes($_GET);
-    $_POST = $this->add_magic_quotes($_POST);
-    $_COOKIE = $this->add_magic_quotes($_COOKIE);
+    $_GET = filter_var_array($_GET, FILTER_SANITIZE_MAGIC_QUOTES);
+    $_POST = filter_var_array($_POST, FILTER_SANITIZE_MAGIC_QUOTES);
+    $_COOKIE = filter_var_array($_COOKIE, FILTER_SANITIZE_MAGIC_QUOTES);
 
     $_REQUEST = array_merge($_GET, $_POST);
-  }
-
-  private function add_magic_quotes( $array ) {
-    foreach ((array) $array as $k => $v) {
-        if (is_array( $v)) {
-            $array[$k] = add_magic_quotes($v);
-        } else {
-            $array[$k] = addslashes($v);
-        }
-    }
-
-    return $array;
   }
 }
