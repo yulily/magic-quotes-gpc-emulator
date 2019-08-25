@@ -12,7 +12,6 @@ class MagicQuotesGpcEmulatorTest extends PHPUnit\Framework\TestCase {
         "bar" => "ba\"r",
         "baz" => "ba\z",
         "qux" => "qu" . chr(0) . "x",
-        "getOnlyValue" => "getOnlyValue",
       ];
 
       $_POST = [
@@ -20,7 +19,6 @@ class MagicQuotesGpcEmulatorTest extends PHPUnit\Framework\TestCase {
         "bar" => "ba\"r",
         "baz" => "ba\z",
         "qux" => "qu" . chr(0) . "x",
-        "postOnlyValue" => "postOnlyValue",
       ];
 
       $_COOKIE = [
@@ -28,7 +26,13 @@ class MagicQuotesGpcEmulatorTest extends PHPUnit\Framework\TestCase {
         "bar" => "ba\"r",
         "baz" => "ba\z",
         "qux" => "qu" . chr(0) . "x",
-        "cookieOnlyValue" => "cookieOnlyValue",
+      ];
+
+      $_REQUEST = [
+        "foo" => "fo'o",
+        "bar" => "ba\"r",
+        "baz" => "ba\z",
+        "qux" => "qu" . chr(0) . "x",
       ];
   }
 
@@ -45,7 +49,6 @@ class MagicQuotesGpcEmulatorTest extends PHPUnit\Framework\TestCase {
       "bar" => "ba\\\"r",
       "baz" => "ba\\\\z",
       "qux" => "qu\\0x",
-      "getOnlyValue" => "getOnlyValue",
     ];
 
     $expectPostValues = [
@@ -53,7 +56,6 @@ class MagicQuotesGpcEmulatorTest extends PHPUnit\Framework\TestCase {
       "bar" => "ba\\\"r",
       "baz" => "ba\\\\z",
       "qux" => "qu\\0x",
-      "postOnlyValue" => "postOnlyValue",
     ];
 
     $expectCookieValues = [
@@ -61,7 +63,6 @@ class MagicQuotesGpcEmulatorTest extends PHPUnit\Framework\TestCase {
       "bar" => "ba\\\"r",
       "baz" => "ba\\\\z",
       "qux" => "qu\\0x",
-      "cookieOnlyValue" => "cookieOnlyValue",
     ];
 
     $expectRequestValues = [
@@ -69,9 +70,6 @@ class MagicQuotesGpcEmulatorTest extends PHPUnit\Framework\TestCase {
       "bar" => "ba\\\"r",
       "baz" => "ba\\\\z",
       "qux" => "qu\\0x",
-      "getOnlyValue" => "getOnlyValue",
-      "postOnlyValue" => "postOnlyValue",
-      "cookieOnlyValue" => "cookieOnlyValue",
     ];
 
     $this->assertEquals($_GET, $expectGetValues);
