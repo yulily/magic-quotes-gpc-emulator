@@ -1,5 +1,7 @@
 <?php
 
+namespace Takapi86;
+
 class MagicQuotesGpcEmulator {
   public function apply() {
     $_GET = filter_var_array($_GET, FILTER_SANITIZE_MAGIC_QUOTES);

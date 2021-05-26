@@ -40,8 +40,7 @@ class MagicQuotesGpcEmulatorTest extends PHPUnit\Framework\TestCase {
   * @test
   */
   public function testApply() {
-    require_once './src/MagicQuotesGpcEmulator.php';
-    $emulator = new MagicQuotesGpcEmulator();
+    $emulator = new Takapi86\MagicQuotesGpcEmulator();
     $emulator->apply();
 
     $expectGetValues = [
