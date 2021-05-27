@@ -6,6 +6,7 @@ class MagicQuotesGpcEmulatorTest extends PHPUnit\Framework\TestCase {
   public function setUp(): void
   {
       parent::setUp();
+      ini_set('error_reporting', E_ALL & ~ E_DEPRECATED);
 
       $_GET = [
         "foo" => "fo'o",
@@ -34,6 +35,15 @@ class MagicQuotesGpcEmulatorTest extends PHPUnit\Framework\TestCase {
         "baz" => "ba\z",
         "qux" => "qu" . chr(0) . "x",
       ];
+  }
+
+  /**
+  * @test
+  */
+  public function testBeforeApply() {
+    $emulator = new Takapi86\MagicQuotesGpcEmulator();
+    $this->assertFalse($emulator->isApplied());
+    $this->assertFalse($emulator->isMagicQuotesGpcEnabled());
   }
 
   /**
@@ -75,5 +85,21 @@ class MagicQuotesGpcEmulatorTest extends PHPUnit\Framework\TestCase {
     $this->assertEquals($_POST, $expectPostValues);
     $this->assertEquals($_COOKIE, $expectCookieValues);
     $this->assertEquals($_REQUEST, $expectRequestValues);
+
+    // second apply
+    $emulator->apply();
+    $this->assertEquals($_GET, $expectGetValues);
+    $this->assertEquals($_POST, $expectPostValues);
+    $this->assertEquals($_COOKIE, $expectCookieValues);
+    $this->assertEquals($_REQUEST, $expectRequestValues);
+  }
+
+  /**
+  * @test
+  */
+  public function testAfterApply() {
+    $emulator = new Takapi86\MagicQuotesGpcEmulator();
+    $this->assertTrue($emulator->isApplied());
+    $this->assertTrue($emulator->isMagicQuotesGpcEnabled());
   }
 }
