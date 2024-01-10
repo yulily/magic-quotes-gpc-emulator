@@ -8,7 +8,7 @@ jobs:
     name: Test
     strategy:
       matrix:
-        php-version: ['7.4']
+        php-version: ['8.1']
     runs-on: ubuntu-latest
     steps:
     - name: Check out source code
